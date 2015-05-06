@@ -38,7 +38,9 @@ grunt.initConfig({
 ```
 
 ### Options
-The only specific configuration options the plugin may take are represented as an optional object representing Swig defaults.  You can merge custom Swig options with the Swig defaults by setting a `swigDefaults` property on the main options.  This approach is illustrated in the Custom Options section below.  The Swig defaults are documented on [the repository page for Swig itself](http://paularmstrong.github.io/swig/docs/api/#SwigOpts).  The most notable of the Swig defaults that may often be set when using this plugin is the `locals` object, which allows you to pass global data to all templates.  The `locals` object is created by referencing a JSON file by path in the plugin options.  Again, this is illustrated below.
+The only specific configuration options the plugin may take are represented as an optional object representing Swig defaults.  You can merge custom Swig options with the Swig defaults by setting a `swigDefaults` property on the main options.  This approach is illustrated in the Custom Options section below.  The Swig defaults are documented on [the repository page for Swig itself](http://paularmstrong.github.io/swig/docs/api/#SwigOpts).  
+
+The most notable of the Swig defaults that may often be set when using this plugin is the `locals` object, which allows you to pass global data to all templates.  The `locals` object is created by referencing a JSON file by path in the plugin options.  Again, this is illustrated below.
 
 ### Usage Examples
 
@@ -63,18 +65,26 @@ grunt.initConfig({
 ```
 
 #### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+In this example, two custom options are passed in that are meant to override Swig defaults: autoescape is set to true and a path to a a JSON file containing data meant to be passed to all templates globally.  It's worth repeating that any properties set globally can be overridden at the template level.  For example, a generic, default page title can (and probably should) be overridden in specific templates.
 
 ```js
 grunt.initConfig({
   sst: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+        swigDefaults: {
+            autoescape: true,
+            locals: 'locals.json' // Will only process a path to a valid JSON file.
+        }
     },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+    files: {[
+        expand: true,
+        cwd: 'foo',
+        dest: 'your/compiled/assets',
+        src: [
+            '**/*/swig'
+        ],
+        ext: '.html'
+    ]},
   },
 });
 ```
@@ -83,4 +93,4 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+* 5/06/15: Initial Release: 0.1.0
