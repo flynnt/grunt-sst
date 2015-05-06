@@ -29,9 +29,10 @@ proto.mergeDefaults = function() {
     var grunt = this.grunt;
     var options = this.options;
     var swigOpts = this.options.swigDefaults;
+    var localsObject;
 
     if (swigOpts.locals && typeof swigOpts.locals === 'string') {
-        var localsObject = grunt.file.readJSON(swigOpts.locals);
+        localsObject = grunt.file.readJSON(swigOpts.locals);
     } else {
         grunt.fail.warn('The locals property must be a file path string to an actual JSON file.');
     }
@@ -41,7 +42,7 @@ proto.mergeDefaults = function() {
     swig.setDefaults(swigOpts);
 
     return this;
-}
+};
 
 proto.renderTemplates = function() {
     var grunt = this.grunt;
@@ -71,7 +72,7 @@ proto.renderTemplates = function() {
 };
 
 module.exports = function(grunt) {
-    grunt.registerMultiTask('swig', 'Compiles Swig templates with Grunt.', function() {
+    grunt.registerMultiTask('sst', 'Compiles Swig templates with Grunt.', function() {
         new SwigTemplate(grunt, this);
   });
 };
