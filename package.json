@@ -21,21 +21,28 @@
     }
   ],
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 0.10.0"
   },
   "scripts": {
     "test": "grunt test"
   },
+  "dependencies": {
+    "swig": "~> 1.4.2"
+  },
   "devDependencies": {
-    "grunt-contrib-jshint": "^0.9.2",
-    "grunt-contrib-clean": "^0.5.0",
-    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt-contrib-jshint": "^0.11.2",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-nodeunit": "^0.4.0",
     "grunt": "~0.4.5"
   },
   "peerDependencies": {
     "grunt": "~0.4.5"
   },
   "keywords": [
-    "gruntplugin"
+    "gruntplugin",
+    "swig",
+    "static site generation",
+    "templating",
+    "solid state transistors"
   ]
 }
