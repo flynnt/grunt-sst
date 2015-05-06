@@ -8,43 +8,70 @@
 
 'use strict';
 
-module.exports = function(grunt) {
+var swig = require('swig');
+var path = require('path');
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
+var SwigTemplate = function(grunt, task) {
+    this.grunt = grunt;
+    this.files = task.files;
+    this.options = task.options();
 
-  grunt.registerMultiTask('sst', 'A simple Swig template generator.', function() {
-    // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({
-      punctuation: '.',
-      separator: ', '
-    });
+    if (this.options.swigDefaults) {
+        this.mergeDefaults();
+    }
 
-    // Iterate over all specified file groups.
-    this.files.forEach(function(f) {
-      // Concat specified files.
-      var src = f.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
+    this.renderTemplates();
+};
+
+var proto = SwigTemplate.prototype;
+
+proto.mergeDefaults = function() {
+    var grunt = this.grunt;
+    var options = this.options;
+    var swigOpts = this.options.swigDefaults;
+
+    if (swigOpts.locals && typeof swigOpts.locals === 'string') {
+        var localsObject = grunt.file.readJSON(swigOpts.locals);
+    } else {
+        grunt.fail.warn('The locals property must be a file path string to an actual JSON file.');
+    }
+
+    swigOpts.locals = localsObject;
+
+    swig.setDefaults(swigOpts);
+
+    return this;
+}
+
+proto.renderTemplates = function() {
+    var grunt = this.grunt;
+    var files = this.files;
+
+    files.forEach(function(file, index) {
+        var cwd = file.orig.cwd || '';
+        var src = file.src[0];
+        var dirname = path.dirname(src);
+        var basename = path.basename(src, '.swig');
+        var outFile = basename + '.html';
+        var tplContextFile = path.join(dirname, basename) + '.json';
+        var tplVars = null;
+
+        if (grunt.file.exists(tplContextFile)) {
+            tplVars = grunt.file.readJSON(tplContextFile);
+            grunt.log.write('Template-specific data found; merging "%s" with "%s".' + '\n', tplContextFile, src);
         }
-      }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
 
-      // Handle options.
-      src += options.punctuation;
+        grunt.log.write('Processing: "%s"' + '\n', src);
 
-      // Write the destination file.
-      grunt.file.write(f.dest, src);
+        grunt.file.write(file.dest, swig.renderFile(src, tplVars));
 
-      // Print a success message.
-      grunt.log.writeln('File "' + f.dest + '" created.');
     });
-  });
 
+    return this;
+};
+
+module.exports = function(grunt) {
+    grunt.registerMultiTask('swig', 'Compiles Swig templates with Grunt.', function() {
+        new SwigTemplate(grunt, this);
+  });
 };
