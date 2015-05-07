@@ -56,7 +56,7 @@ grunt.initConfig({
         cwd: 'foo',
         dest: 'your/compiled/assets',
         src: [
-            '**/*/swig'
+            '**/*.swig'
         ],
         ext: '.html'
     ]},
@@ -81,7 +81,7 @@ grunt.initConfig({
         cwd: 'foo',
         dest: 'your/compiled/assets',
         src: [
-            '**/*/swig'
+            '**/*.swig'
         ],
         ext: '.html'
     ]},
