@@ -8,7 +8,7 @@ This plugin requires Grunt `~0.4.5`
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
-npm install grunt-sst --save
+npm install git://github.com/flynnt/grunt-sst.git --save
 ```
 
 This command will download the plugin package along with its dependencies, as well as add it as a dependency to your project's `package.json` file.
