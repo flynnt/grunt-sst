@@ -40,7 +40,7 @@ grunt.initConfig({
 ### Options
 The only specific configuration options the plugin may take are represented as an optional object representing Swig defaults.  You can merge custom Swig options with the Swig defaults by setting a `swigDefaults` property on the main options.  This approach is illustrated in the Custom Options section below.  The Swig defaults are documented on [the repository page for Swig itself](http://paularmstrong.github.io/swig/docs/api/#SwigOpts).  
 
-The most notable of the Swig defaults that may often be set when using this plugin is the `locals` object, which allows you to pass global data to all templates.  The `locals` object is created by referencing a JSON file by path in the plugin options.  Again, this is illustrated below.
+The most notable of the Swig defaults that may often be set when using this plugin is the `locals` object, which allows you to pass global data to all templates.
 
 ### Usage Examples
 
@@ -65,7 +65,7 @@ grunt.initConfig({
 ```
 
 #### Custom Options
-In this example, two custom options are passed in that are meant to override Swig defaults: autoescape is set to true and a path to a a JSON file containing data meant to be passed to all templates globally.  It's worth repeating that any properties set globally can be overridden at the template level.  For example, a generic, default page title can (and probably should) be overridden in specific templates.
+In this example, two custom options are passed in that are meant to override Swig defaults: autoescape is set to true and a path to an object containing data meant to be passed to all templates globally.
 
 ```js
 grunt.initConfig({
@@ -73,7 +73,7 @@ grunt.initConfig({
     options: {
         swigDefaults: {
             autoescape: true,
-            locals: 'locals.json' // Will only process a path to a valid JSON file.
+            locals: { foo: 'bar' }
         }
     },
     files: {[
@@ -94,3 +94,4 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 * 5/06/15: Initial Release: 0.1.0
+* 8/8/15: Second Development Release: 0.2.0
