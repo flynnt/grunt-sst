@@ -17,7 +17,7 @@ var SwigTemplate = function(grunt, task) {
     this.options = task.options();
 
     if (this.options.swigDefaults) {
-        this.mergeDefaults();
+        swig.setDefaults(this.options.swigDefaults);
     }
 
     this.renderTemplates();
@@ -25,28 +25,10 @@ var SwigTemplate = function(grunt, task) {
 
 var proto = SwigTemplate.prototype;
 
-proto.mergeDefaults = function() {
-    var grunt = this.grunt;
-    var options = this.options;
-    var swigOpts = this.options.swigDefaults;
-    var localsObject;
-
-    if (swigOpts.locals && typeof swigOpts.locals === 'string') {
-        localsObject = grunt.file.readJSON(swigOpts.locals);
-    } else {
-        grunt.fail.warn('The locals property must be a file path string to an actual JSON file.');
-    }
-
-    swigOpts.locals = localsObject;
-
-    swig.setDefaults(swigOpts);
-
-    return this;
-};
-
 proto.renderTemplates = function() {
     var grunt = this.grunt;
     var files = this.files;
+    var options = this.options;
 
     files.forEach(function(file, index) {
         var cwd = file.orig.cwd || '';
@@ -54,17 +36,10 @@ proto.renderTemplates = function() {
         var dirname = path.dirname(src);
         var basename = path.basename(src, '.swig');
         var outFile = basename + '.html';
-        var tplContextFile = path.join(dirname, basename) + '.json';
-        var tplVars = null;
-
-        if (grunt.file.exists(tplContextFile)) {
-            tplVars = grunt.file.readJSON(tplContextFile);
-            grunt.log.write('Template-specific data found; merging "%s" with "%s".' + '\n', tplContextFile, src);
-        }
 
         grunt.log.write('Processing: "%s"' + '\n', src);
 
-        grunt.file.write(file.dest, swig.renderFile(src, tplVars));
+        grunt.file.write(file.dest, swig.renderFile(src, {}));
 
     });
 
