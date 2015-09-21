@@ -2,22 +2,22 @@
   "name": "grunt-sst",
   "description": "A simple Swig template generator.",
   "version": "0.2.0",
-  "homepage": "https://github.com/tflynn/grunt-sst",
+  "homepage": "https://github.com/flynnt/grunt-sst",
   "author": {
     "name": "Ted Flynn",
     "email": "acephale@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/tflynn/grunt-sst.git"
+    "url": "git://github.com/flynnt/grunt-sst.git"
   },
   "bugs": {
-    "url": "https://github.com/tflynn/grunt-sst/issues"
+    "url": "https://github.com/flynnt/grunt-sst/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/tflynn/grunt-sst/blob/master/LICENSE-MIT"
+      "url": "https://github.com/flynnt/grunt-sst/blob/master/LICENSE-MIT"
     }
   ],
   "engines": {
