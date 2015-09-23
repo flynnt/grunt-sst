@@ -1,7 +1,7 @@
 {
   "name": "grunt-sst",
   "description": "A simple Swig template generator.",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "homepage": "https://github.com/flynnt/grunt-sst",
   "author": {
     "name": "Ted Flynn",
