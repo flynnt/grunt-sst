@@ -1,6 +1,6 @@
 # grunt-sst
 
-grunt-sst is yet another Grunt-based mechanism for compiling [Swig](http://paularmstrong.github.io/swig/) templates into static HTML.  The plugin takes a files array and an options object.  It recursively scans through your files and uses Swig to render templates with all the features that Swig itself provides.  Data can be passed to templates both by means of a global `locals` object that is part of Swig's default options.  Data can also be passed on a template level by convention.  In the simplest example, if you have a file named `index.swig`, providing a file in the same location named `index.json` will tell the plugin to merge that data with `locals`.  While properties set in `locals` are global to every template, they can be overridden at the template level.
+grunt-sst is yet another Grunt-based mechanism for compiling [Swig](http://paularmstrong.github.io/swig/) templates into static HTML.  The plugin takes a files array and an options object.  It recursively scans through your files and uses Swig to render templates with all the features that Swig itself provides.  Data can be passed to templates both by means of a global `locals` object that is part of Swig's default options.  While properties set in `locals` are global to every template, they can be overridden at the template level.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
@@ -40,7 +40,7 @@ grunt.initConfig({
 ### Options
 The only specific configuration options the plugin may take are represented as an optional object representing Swig defaults.  You can merge custom Swig options with the Swig defaults by setting a `swigDefaults` property on the main options.  This approach is illustrated in the Custom Options section below.  The Swig defaults are documented on [the repository page for Swig itself](http://paularmstrong.github.io/swig/docs/api/#SwigOpts).  
 
-The most notable of the Swig defaults that may often be set when using this plugin is the `locals` object, which allows you to pass global data to all templates.
+The most notable of the Swig defaults that may be set when using this plugin is the `locals` object, which allows you to pass global data to all templates.
 
 ### Usage Examples
 
