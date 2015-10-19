@@ -1,6 +1,6 @@
 /*
  * grunt-sst
- * https://github.com/tflynn/grunt-sst
+ * https://github.com/flynnt/grunt-sst
  *
  * Copyright (c) 2015 Ted Flynn
  * Licensed under the MIT license.
