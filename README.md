@@ -3,7 +3,7 @@
 grunt-sst is yet another Grunt-based mechanism for compiling [Swig](http://paularmstrong.github.io/swig/) templates into static HTML.  The plugin takes a files array and an options object.  It recursively scans through your files and uses Swig to render templates with all the features that Swig itself provides.  Data can be passed to templates both by means of a global `locals` object that is part of Swig's default options.  While properties set in `locals` are global to every template, they can be overridden at the template level.
 
 ## Getting Started
-This plugin requires Grunt `~0.4.5`
+This plugin requires Grunt `>=0.4.0`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
